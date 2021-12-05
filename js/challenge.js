@@ -9,7 +9,7 @@ setInterval( () => timeCounter(), 1000)
 
 
 document.addEventListener('click', function(event){
-    event.preventDefault()
+    // 
     if (event.target.id === 'minus') {
         decrementCounter(event)
     }
@@ -22,16 +22,20 @@ document.addEventListener('click', function(event){
     if (event.target.id === 'pause') {
         pauseCounter(event)
     }
-    // if (event.target.id === 'submit') {
-    //     comment(event)
-    // }
-    document.querySelector('form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        console.log('supbb')
-    })
+ 
 })
 
+const form = document.querySelector('form')
+const inputField = document.getElementById('comment-input')
 
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = `${inputField.value}`
+    const div = document.getElementById('list')
+    const p = document.createElement('p')    
+    p.append(input)
+    div.appendChild(p)
+})
 
 function timeCounter() {
     if (pauseButton.innerText === 'pause'){
@@ -80,10 +84,8 @@ function pauseCounter(event) {
 
 function comment(event) { 
     const div = document.getElementById('list')
-    const p = document.createElement('p')
-    const formText = event.target.list
-    console.log(formText)
-    p.append(formText)
+    const p = document.createElement('p')    
+    p.append(inputField)
     div.appendChild(p)
 }
 
